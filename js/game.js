@@ -21,9 +21,8 @@ var shipProperties = {
     startY: gameProperties.screenHeight * 0.5,
 };
 
-
 var gameState = function(game){
-    
+    this.shipSprite;
 };
 
 gameState.prototype = {
@@ -44,6 +43,11 @@ gameState.prototype = {
     update: function () {
         
     },
+
+    initGraphics: function () {
+        this.shipSprite = game.add.sprite(shipProperties.startX, shipProperties.startY, graphicAssets.ship.name);
+        this.shipSprite.angle = -90;
+        this.shipSprite.anchor.set(0.5, 0.5); 
 };
 
 var game = new Phaser.Game(gameProperties.screenWidth, gameProperties.screenHeight, Phaser.AUTO, 'gameDiv');
