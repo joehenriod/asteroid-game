@@ -37,7 +37,7 @@ gameState.prototype = {
     },
     
     create: function () {
-        
+        this.initGraphics();
     },
 
     update: function () {
