@@ -16,6 +16,12 @@ var graphicAssets = {
     asteroidSmall:{URL:'assets/asteroidSmall.png', name:'asteroidSmall'},
 };
 
+var shipProperties = {
+    startX: gameProperties.screenWidth * 0.5,
+    startY: gameProperties.screenHeight * 0.5,
+};
+
+
 var gameState = function(game){
     
 };
