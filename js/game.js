@@ -27,10 +27,6 @@ var shipProperties = {
 
 var gameState = function (game){
     this.shipSprite;
-
-    this.key_left;
-    this.key_right;
-    this.key_thrust;
 };
 
 gameState.prototype = {
@@ -47,6 +43,7 @@ gameState.prototype = {
     create: function () {
         this.initGraphics();
         this.initPhysics();
+        this.initKeyboard();
     },
 
     update: function () {
@@ -58,7 +55,7 @@ gameState.prototype = {
         this.shipSprite.angle = -90;
         this.shipSprite.anchor.set(0.5, 0.5);
     },
-
+    
     initPhysics: function () {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         
@@ -66,13 +63,13 @@ gameState.prototype = {
         this.shipSprite.body.drag.set(shipProperties.drag);
         this.shipSprite.body.maxVelocity.set(shipProperties.maxVelocity);
     },
-
+    
     initKeyboard: function () {
         this.key_left = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
         this.key_right = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
         this.key_thrust = game.input.keyboard.addKey(Phaser.Keyboard.UP);
     },
-
+    
     checkPlayerInput: function () {
         if (this.key_left.isDown) {
             this.shipSprite.body.angularVelocity = -shipProperties.angularVelocity;
