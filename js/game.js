@@ -27,6 +27,10 @@ var shipProperties = {
 
 var gameState = function (game){
     this.shipSprite;
+    
+    this.key_left;
+    this.key_right;
+    this.key_thrust;
 };
 
 gameState.prototype = {
@@ -42,6 +46,7 @@ gameState.prototype = {
     
     create: function () {
         this.initGraphics();
+        this.initPhysics();
     },
 
     update: function () {
@@ -53,7 +58,7 @@ gameState.prototype = {
         this.shipSprite.angle = -90;
         this.shipSprite.anchor.set(0.5, 0.5);
     },
-    
+
     initPhysics: function () {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         
