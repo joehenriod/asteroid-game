@@ -93,6 +93,7 @@ gameState.prototype = {
         this.key_left = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
         this.key_right = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
         this.key_thrust = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+        this.key_fire = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     },
     
     checkPlayerInput: function () {
