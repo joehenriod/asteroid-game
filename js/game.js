@@ -25,8 +25,23 @@ var shipProperties = {
     angularVelocity: 200,
 };
 
+var bulletProperties = {
+    speed: 400,
+    interval: 250,
+    lifeSpan: 2000,
+    maxCount: 30,
+}
+
 var gameState = function (game){
     this.shipSprite;
+    
+    this.key_left;
+    this.key_right;
+    this.key_thrust;
+    this.key_fire;
+    
+    this.bulletGroup;
+    this.bulletInterval = 0;
 };
 
 gameState.prototype = {
