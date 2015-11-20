@@ -44,6 +44,10 @@ var asteroidProperties = {
     asteroidSmall: { minVelocity: 50, maxVelocity: 300, minAngularVelocity: 0, maxAngularVelocity: 200, score: 100 },
 };
 
+var fontAssets = {
+    counterFontStyle:{font: '20px Arial', fill: '#FFFFFF', align: 'center'},
+}
+
 var gameState = function (game){
     this.shipSprite;
     
