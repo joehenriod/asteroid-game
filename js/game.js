@@ -213,10 +213,14 @@ gameState.prototype = {
     asteroidCollision: function (target, asteroid) {
         target.kill();
         asteroid.kill();
+
+        if (target.key == graphicAssets.ship.name) {
+            this.destroyShip();
+        }
     },
 
      destroyShip: function () {
-        this.shipLives --;
+        this.shipLives = this.shipLives - 1;
         this.tf_lives.text = this.shipLives;
     },
 };
