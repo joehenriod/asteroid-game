@@ -72,12 +72,14 @@ gameState.prototype = {
         this.initGraphics();
         this.initPhysics();
         this.initKeyboard();
+        this.resetAsteroids();
     },
 
     update: function () {
         this.checkPlayerInput();
         this.checkBoundaries(this.shipSprite);
         this.bulletGroup.forEachExists(this.checkBoundaries, this);
+        this.asteroidGroup.forEachExists(this.checkBoundaries, this);
     },
     
     initGraphics: function () {
