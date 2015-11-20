@@ -214,6 +214,11 @@ gameState.prototype = {
         target.kill();
         asteroid.kill();
     },
+
+     destroyShip: function () {
+        this.shipLives --;
+        this.tf_lives.text = this.shipLives;
+    },
 };
 
 var game = new Phaser.Game(gameProperties.screenWidth, gameProperties.screenHeight, Phaser.AUTO, 'gameDiv');
