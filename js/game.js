@@ -23,6 +23,8 @@ var shipProperties = {
     drag: 100,
     maxVelocity: 300,
     angularVelocity: 200,
+    startingLives: 3,
+    timeToReset: 3,
 };
 
 var bulletProperties = {
@@ -80,6 +82,9 @@ gameState.prototype = {
         this.checkBoundaries(this.shipSprite);
         this.bulletGroup.forEachExists(this.checkBoundaries, this);
         this.asteroidGroup.forEachExists(this.checkBoundaries, this);
+
+        game.physics.arcade.overlap(this.bulletGroup, this.asteroidGroup, this.asteroidCollision, null, this);
+        game.physics.arcade.overlap(this.shipSprite, this.asteroidGroup, this.asteroidCollision, null, this);
     },
     
     initGraphics: function () {
@@ -196,6 +201,11 @@ gameState.prototype = {
             
             this.createAsteroid(x, y, graphicAssets.asteroidLarge.name);
         }
+    },
+
+    asteroidCollision: function (target, asteroid) {
+        target.kill();
+        asteroid.kill();
     },
 };
 
