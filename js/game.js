@@ -39,8 +39,8 @@ var asteroidProperties = {
     maxAsteroids: 20,
     incrementAsteroids: 2,
     
-    asteroidLarge: { minVelocity: 50, maxVelocity: 150, minAngularVelocity: 0, maxAngularVelocity: 200, score: 20, nextSize: graphicAssets.asteroidMedium.name },
-    asteroidMedium: { minVelocity: 50, maxVelocity: 200, minAngularVelocity: 0, maxAngularVelocity: 200, score: 50, nextSize: graphicAssets.asteroidSmall.name },
+    asteroidLarge: { minVelocity: 50, maxVelocity: 150, minAngularVelocity: 0, maxAngularVelocity: 200, score: 20, nextSize: graphicAssets.asteroidMedium.name, pieces: 2 },
+    asteroidMedium: { minVelocity: 50, maxVelocity: 200, minAngularVelocity: 0, maxAngularVelocity: 200, score: 50, nextSize: graphicAssets.asteroidSmall.name, pieces: 2 },
     asteroidSmall: { minVelocity: 50, maxVelocity: 300, minAngularVelocity: 0, maxAngularVelocity: 200, score: 100 },
 };
 
@@ -231,6 +231,12 @@ gameState.prototype = {
     resetShip: function () {
         this.shipSprite.reset(shipProperties.startX, shipProperties.startY);
         this.shipSprite.angle = -90;
+    },
+
+    splitAsteroid: function (asteroid) {
+        if (asteroidProperties[asteroid.key].nextSize) {
+            this.createAsteroid(asteroid.x, asteroid.y, asteroidProperties[asteroid.key].nextSize, asteroidProperties[asteroid.key].pieces);
+        }
     },
 };
 
