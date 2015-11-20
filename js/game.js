@@ -223,6 +223,11 @@ gameState.prototype = {
         this.shipLives = this.shipLives - 1;
         this.tf_lives.text = this.shipLives;
     },
+
+    resetShip: function () {
+        this.shipSprite.reset(shipProperties.startX, shipProperties.startY);
+        this.shipSprite.angle = -90;
+    },
 };
 
 var game = new Phaser.Game(gameProperties.screenWidth, gameProperties.screenHeight, Phaser.AUTO, 'gameDiv');
