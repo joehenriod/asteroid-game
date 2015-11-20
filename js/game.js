@@ -61,7 +61,7 @@ var gameState = function (game){
     
     this.asteroidGroup;
     this.asteroidsCount = asteroidProperties.startingAsteroids;
-
+    
     this.shipLives = shipProperties.startingLives;
     this.tf_lives;
 };
@@ -89,7 +89,7 @@ gameState.prototype = {
         this.checkBoundaries(this.shipSprite);
         this.bulletGroup.forEachExists(this.checkBoundaries, this);
         this.asteroidGroup.forEachExists(this.checkBoundaries, this);
-
+        
         game.physics.arcade.overlap(this.bulletGroup, this.asteroidGroup, this.asteroidCollision, null, this);
         game.physics.arcade.overlap(this.shipSprite, this.asteroidGroup, this.asteroidCollision, null, this);
     },
@@ -101,6 +101,8 @@ gameState.prototype = {
         
         this.bulletGroup = game.add.group();
         this.asteroidGroup = game.add.group();
+        
+        this.tf_lives = game.add.text(20, 10, shipProperties.startingLives, fontAssets.counterFontStyle);
     },
     
     initPhysics: function () {
@@ -188,10 +190,10 @@ gameState.prototype = {
             var asteroid = this.asteroidGroup.create(x, y, size);
             asteroid.anchor.set(0.5, 0.5);
             asteroid.body.angularVelocity = game.rnd.integerInRange(asteroidProperties[size].minAngularVelocity, asteroidProperties[size].maxAngularVelocity);
- 
+
             var randomAngle = game.math.degToRad(game.rnd.angle());
             var randomVelocity = game.rnd.integerInRange(asteroidProperties[size].minVelocity, asteroidProperties[size].maxVelocity);
- 
+
             game.physics.arcade.velocityFromRotation(randomAngle, randomVelocity, asteroid.body.velocity);
         }
     },
@@ -213,26 +215,32 @@ gameState.prototype = {
             this.createAsteroid(x, y, graphicAssets.asteroidLarge.name);
         }
     },
-
+    
     asteroidCollision: function (target, asteroid) {
         target.kill();
         asteroid.kill();
-
+        
         if (target.key == graphicAssets.ship.name) {
             this.destroyShip();
         }
+        
+        this.splitAsteroid(asteroid);
     },
-
-     destroyShip: function () {
-        this.shipLives = this.shipLives - 1;
+    
+    destroyShip: function () {
+        this.shipLives --;
         this.tf_lives.text = this.shipLives;
-    },
 
+        if (this.shipLives) {
+            game.time.events.add(Phaser.Timer.SECOND * shipProperties.timeToReset, this.resetShip, this);
+        }
+    },
+    
     resetShip: function () {
         this.shipSprite.reset(shipProperties.startX, shipProperties.startY);
         this.shipSprite.angle = -90;
     },
-
+    
     splitAsteroid: function (asteroid) {
         if (asteroidProperties[asteroid.key].nextSize) {
             this.createAsteroid(asteroid.x, asteroid.y, asteroidProperties[asteroid.key].nextSize, asteroidProperties[asteroid.key].pieces);
