@@ -52,6 +52,9 @@ var gameState = function (game){
     
     this.bulletGroup;
     this.bulletInterval = 0;
+
+    this.asteroidGroup;
+    this.asteroidsCount = asteroidProperties.startingAsteroids;
 };
 
 gameState.prototype = {
@@ -83,6 +86,7 @@ gameState.prototype = {
         this.shipSprite.anchor.set(0.5, 0.5);
         
         this.bulletGroup = game.add.group();
+        this.asteroidGroup = game.add.group();
     },
     
     initPhysics: function () {
@@ -98,6 +102,9 @@ gameState.prototype = {
         this.bulletGroup.setAll('anchor.x', 0.5);
         this.bulletGroup.setAll('anchor.y', 0.5);
         this.bulletGroup.setAll('lifespan', bulletProperties.lifeSpan);
+
+        this.asteroidGroup.enableBody = true;
+        this.asteroidGroup.physicsBodyType = Phaser.Physics.ARCADE;
     },
     
     initKeyboard: function () {
