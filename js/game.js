@@ -57,6 +57,9 @@ var gameState = function (game){
     
     this.asteroidGroup;
     this.asteroidsCount = asteroidProperties.startingAsteroids;
+
+    this.shipLives = shipProperties.startingLives;
+    this.tf_lives;
 };
 
 gameState.prototype = {
