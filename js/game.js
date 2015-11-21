@@ -64,6 +64,9 @@ var gameState = function (game){
     
     this.shipLives = shipProperties.startingLives;
     this.tf_lives;
+
+    this.score = 0;
+    this.tf_score;
 };
 
 gameState.prototype = {
@@ -103,6 +106,10 @@ gameState.prototype = {
         this.asteroidGroup = game.add.group();
         
         this.tf_lives = game.add.text(20, 10, shipProperties.startingLives, fontAssets.counterFontStyle);
+
+        this.tf_score = game.add.text(gameProperties.screenWidth - 20, 10, "0", fontAssets.counterFontStyle);
+        this.tf_score.align = 'right';
+        this.tf_score.anchor.set(1, 0);
     },
     
     initPhysics: function () {
