@@ -253,6 +253,11 @@ gameState.prototype = {
             this.createAsteroid(asteroid.x, asteroid.y, asteroidProperties[asteroid.key].nextSize, asteroidProperties[asteroid.key].pieces);
         }
     },
+
+    updateScore: function (score) {
+        this.score += score;
+        this.tf_score.text = this.score;
+    },
 };
 
 var game = new Phaser.Game(gameProperties.screenWidth, gameProperties.screenHeight, Phaser.AUTO, 'gameDiv');
