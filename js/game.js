@@ -232,6 +232,7 @@ gameState.prototype = {
         }
         
         this.splitAsteroid(asteroid);
+        this.updateScore(asteroidProperties[asteroid.key].score);
     },
     
     destroyShip: function () {
