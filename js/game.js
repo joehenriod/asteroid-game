@@ -261,6 +261,16 @@ gameState.prototype = {
         this.score += score;
         this.tf_score.text = this.score;
     },
+
+    nextLevel: function () {
+        this.asteroidGroup.removeAll(true);
+        
+        if (this.asteroidsCount < asteroidProperties.maxAsteroids) {
+            this.asteroidsCount += asteroidProperties.incrementAsteroids;
+        }
+        
+        this.resetAsteroids();
+    },
 };
 
 var game = new Phaser.Game(gameProperties.screenWidth, gameProperties.screenHeight, Phaser.AUTO, 'gameDiv');
