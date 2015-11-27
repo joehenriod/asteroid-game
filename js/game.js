@@ -85,6 +85,9 @@ gameState.prototype = {
         
         game.load.image(graphicAssets.bullet.name, graphicAssets.bullet.URL);
         game.load.image(graphicAssets.ship.name, graphicAssets.ship.URL);
+
+        game.load.audio(soundAssets.destroyed.name, soundAssets.destroyed.URL);
+        game.load.audio(soundAssets.fire.name, soundAssets.fire.URL);
     },
     
     create: function () {
