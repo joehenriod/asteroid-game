@@ -18,6 +18,11 @@ var graphicAssets = {
     asteroidSmall:{URL:'assets/asteroidSmall.png', name:'asteroidSmall'},
 };
 
+var soundAssets = {
+    fire:{URL:['assets/fire.m4a', 'assets/fire.ogg'], name:'fire'},
+    destroyed:{URL:['assets/destroyed.m4a', 'assets/destroyed.ogg'], name:'destroyed'},
+};
+
 var shipProperties = {
     startX: gameProperties.screenWidth * 0.5,
     startY: gameProperties.screenHeight * 0.5,
