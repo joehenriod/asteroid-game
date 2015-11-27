@@ -110,6 +110,10 @@ gameState.prototype = {
         
         game.physics.arcade.overlap(this.bulletGroup, this.asteroidGroup, this.asteroidCollision, null, this);
         game.physics.arcade.overlap(this.shipSprite, this.asteroidGroup, this.asteroidCollision, null, this);
+
+        if (!this.shipIsInvulnerable) {
+            game.physics.arcade.overlap(this.shipSprite, this.asteroidGroup, this.asteroidCollision, null, this);
+        }
     },
     
     initGraphics: function () {
