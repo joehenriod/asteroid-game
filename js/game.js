@@ -74,6 +74,9 @@ var gameState = function (game){
 
     this.score = 0;
     this.tf_score;
+
+    this.sndDestroyed;
+    this.sndFire;
 };
 
 gameState.prototype = {
@@ -92,6 +95,7 @@ gameState.prototype = {
     
     create: function () {
         this.initGraphics();
+        this.initSounds();
         this.initPhysics();
         this.initKeyboard();
         this.resetAsteroids();
@@ -120,6 +124,11 @@ gameState.prototype = {
         this.tf_score = game.add.text(gameProperties.screenWidth - 20, 10, "0", fontAssets.counterFontStyle);
         this.tf_score.align = 'right';
         this.tf_score.anchor.set(1, 0);
+    },
+
+     initSounds: function () {
+        this.sndDestroyed = game.add.audio(soundAssets.destroyed.name);
+        this.sndFire = game.add.audio(soundAssets.fire.name);
     },
     
     initPhysics: function () {
