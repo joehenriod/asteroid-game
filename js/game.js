@@ -57,6 +57,7 @@ var fontAssets = {
 
 var gameState = function (game){
     this.shipSprite;
+    this.shipIsInvulnerable;
     
     this.key_left;
     this.key_right;
