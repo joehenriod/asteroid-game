@@ -243,6 +243,8 @@ gameState.prototype = {
     },
     
     asteroidCollision: function (target, asteroid) {
+        this.sndDestroyed.play();
+
         target.kill();
         asteroid.kill();
         
