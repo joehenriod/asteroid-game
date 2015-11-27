@@ -235,6 +235,10 @@ gameState.prototype = {
         
         this.splitAsteroid(asteroid);
         this.updateScore(asteroidProperties[asteroid.key].score);
+
+         if (!this.asteroidGroup.countLiving()) {
+            game.time.events.add(Phaser.Timer.SECOND * gameProperties.delayToStartLevel, this.nextLevel, this);
+        }
     },
     
     destroyShip: function () {
