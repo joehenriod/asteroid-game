@@ -275,6 +275,7 @@ gameState.prototype = {
     },
     
     resetShip: function () {
+        this.shipIsInvulnerable = true;
         this.shipSprite.reset(shipProperties.startX, shipProperties.startY);
         this.shipSprite.angle = -90;
     },
