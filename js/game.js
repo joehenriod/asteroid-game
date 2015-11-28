@@ -32,6 +32,7 @@ var shipProperties = {
     angularVelocity: 200,
     startingLives: 3,
     timeToReset: 3,
+    blinkDelay: 0.2,
 };
 
 var bulletProperties = {
@@ -278,7 +279,7 @@ gameState.prototype = {
         this.shipIsInvulnerable = true;
         this.shipSprite.reset(shipProperties.startX, shipProperties.startY);
         this.shipSprite.angle = -90;
-        
+
         game.time.events.add(Phaser.Timer.SECOND * shipProperties.timeToReset, this.shipReady, this);
     },
 
