@@ -287,6 +287,10 @@ gameState.prototype = {
     shipReady: function () {
         this.shipIsInvulnerable = false;
     },
+
+    shipBlink: function () {
+        this.shipSprite.visible = !this.shipSprite.visible;
+    },
     
     splitAsteroid: function (asteroid) {
         if (asteroidProperties[asteroid.key].nextSize) {
