@@ -278,6 +278,13 @@ gameState.prototype = {
         this.shipIsInvulnerable = true;
         this.shipSprite.reset(shipProperties.startX, shipProperties.startY);
         this.shipSprite.angle = -90;
+        
+        game.time.events.add(Phaser.Timer.SECOND * shipProperties.timeToReset, this.shipReady, this);
+    },
+
+
+    shipReady: function () {
+        this.shipIsInvulnerable = false;
     },
     
     splitAsteroid: function (asteroid) {
