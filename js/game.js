@@ -281,7 +281,9 @@ gameState.prototype = {
         this.shipSprite.angle = -90;
 
         game.time.events.add(Phaser.Timer.SECOND * shipProperties.timeToReset, this.shipReady, this);
+        game.time.events.repeat(Phaser.Timer.SECOND * shipProperties.blinkDelay, shipProperties.timeToReset / shipProperties.blinkDelay, this.shipBlink, this);
     },
+
 
 
     shipReady: function () {
