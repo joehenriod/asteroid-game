@@ -16,6 +16,11 @@ var graphicAssets = {
     asteroidLarge:{URL:'assets/asteroidLarge.png', name:'asteroidLarge'},
     asteroidMedium:{URL:'assets/asteroidMedium.png', name:'asteroidMedium'},
     asteroidSmall:{URL:'assets/asteroidSmall.png', name:'asteroidSmall'},
+
+    background:{URL:'assets/background.png', name:'background'},
+    explosionLarge:{URL:'assets/explosionLarge.png', name:'explosionLarge', width:64, height:64, frames:8},
+    explosionMedium:{URL:'assets/explosionMedium.png', name:'explosionMedium', width:58, height:58, frames:8},
+    explosionSmall:{URL:'assets/explosionSmall.png', name:'explosionSmall', width:41, height:41, frames:8},
 };
 
 var soundAssets = {
@@ -201,7 +206,7 @@ gameState.prototype = {
          if (!this.shipSprite.alive) {
             return;
         }
-        
+
         if (game.time.now > this.bulletInterval) {            
             var bullet = this.bulletGroup.getFirstExists(false);
             
