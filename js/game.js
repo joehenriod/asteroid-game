@@ -197,6 +197,11 @@ gameState.prototype = {
     },
     
     fire: function () {
+
+         if (!this.shipSprite.alive) {
+            return;
+        }
+        
         if (game.time.now > this.bulletInterval) {            
             var bullet = this.bulletGroup.getFirstExists(false);
             
@@ -283,7 +288,7 @@ gameState.prototype = {
         game.time.events.add(Phaser.Timer.SECOND * shipProperties.timeToReset, this.shipReady, this);
         game.time.events.repeat(Phaser.Timer.SECOND * shipProperties.blinkDelay, shipProperties.timeToReset / shipProperties.blinkDelay, this.shipBlink, this);
     },
-    
+
     shipReady: function () {
         this.shipIsInvulnerable = false;
         this.shipSprite.visible = true;
