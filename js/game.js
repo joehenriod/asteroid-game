@@ -96,8 +96,10 @@ gameState.prototype = {
         game.load.image(graphicAssets.bullet.name, graphicAssets.bullet.URL);
         game.load.image(graphicAssets.ship.name, graphicAssets.ship.URL);
 
-        game.load.audio(soundAssets.destroyed.name, soundAssets.destroyed.URL);
-        game.load.audio(soundAssets.fire.name, soundAssets.fire.URL);
+        game.load.image(graphicAssets.background.name, graphicAssets.background.URL);
+        game.load.spritesheet(graphicAssets.explosionLarge.name, graphicAssets.explosionLarge.URL, graphicAssets.explosionLarge.width, graphicAssets.explosionLarge.height, graphicAssets.explosionLarge.frames);
+        game.load.spritesheet(graphicAssets.explosionMedium.name, graphicAssets.explosionMedium.URL, graphicAssets.explosionMedium.width, graphicAssets.explosionMedium.height, graphicAssets.explosionMedium.frames);
+        game.load.spritesheet(graphicAssets.explosionSmall.name, graphicAssets.explosionSmall.URL, graphicAssets.explosionSmall.width, graphicAssets.explosionSmall.height, graphicAssets.explosionSmall.frames);
     },
     
     create: function () {
