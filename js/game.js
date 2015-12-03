@@ -131,6 +131,8 @@ gameState.prototype = {
     },
     
     initGraphics: function () {
+        this.backgroundSprite = game.add.sprite(0, 0, graphicAssets.background.name);
+        
         this.shipSprite = game.add.sprite(shipProperties.startX, shipProperties.startY, graphicAssets.ship.name);
         this.shipSprite.angle = -90;
         this.shipSprite.anchor.set(0.5, 0.5);
