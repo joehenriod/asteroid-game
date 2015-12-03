@@ -145,7 +145,7 @@ gameState.prototype = {
         this.tf_score = game.add.text(gameProperties.screenWidth - 20, 10, "0", fontAssets.counterFontStyle);
         this.tf_score.align = 'right';
         this.tf_score.anchor.set(1, 0);this.explosionLargeGroup = game.add.group();
-        
+
         this.explosionLargeGroup.createMultiple(20, graphicAssets.explosionLarge.name, 0);
         this.explosionLargeGroup.setAll('anchor.x', 0.5);
         this.explosionLargeGroup.setAll('anchor.y', 0.5);
@@ -301,6 +301,11 @@ gameState.prototype = {
          if (!this.asteroidGroup.countLiving()) {
             game.time.events.add(Phaser.Timer.SECOND * gameProperties.delayToStartLevel, this.nextLevel, this);
         }
+
+        var explosionGroup = asteroidProperties[asteroid.key].explosion + "Group";
+        var explosion = this[explosionGroup].getFirstExists(false);
+        explosion.reset(asteroid.x, asteroid.y);
+        explosion.animations.play('explode', null, false, true);
     },
     
     destroyShip: function () {
