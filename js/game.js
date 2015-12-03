@@ -84,6 +84,12 @@ var gameState = function (game){
 
     this.sndDestroyed;
     this.sndFire;
+
+    this.backgroundSprite;
+    
+    this.explosionLargeGroup;
+    this.explosionMediumGroup;
+    this.explosionSmallGroup;
 };
 
 gameState.prototype = {
