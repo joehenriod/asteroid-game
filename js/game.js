@@ -132,7 +132,7 @@ gameState.prototype = {
     
     initGraphics: function () {
         this.backgroundSprite = game.add.sprite(0, 0, graphicAssets.background.name);
-        
+
         this.shipSprite = game.add.sprite(shipProperties.startX, shipProperties.startY, graphicAssets.ship.name);
         this.shipSprite.angle = -90;
         this.shipSprite.anchor.set(0.5, 0.5);
@@ -144,7 +144,24 @@ gameState.prototype = {
 
         this.tf_score = game.add.text(gameProperties.screenWidth - 20, 10, "0", fontAssets.counterFontStyle);
         this.tf_score.align = 'right';
-        this.tf_score.anchor.set(1, 0);
+        this.tf_score.anchor.set(1, 0);this.explosionLargeGroup = game.add.group();
+        
+        this.explosionLargeGroup.createMultiple(20, graphicAssets.explosionLarge.name, 0);
+        this.explosionLargeGroup.setAll('anchor.x', 0.5);
+        this.explosionLargeGroup.setAll('anchor.y', 0.5);
+        this.explosionLargeGroup.callAll('animations.add', 'animations', 'explode', null, 30);
+        
+        this.explosionMediumGroup = game.add.group();
+        this.explosionMediumGroup.createMultiple(20, graphicAssets.explosionMedium.name, 0);
+        this.explosionMediumGroup.setAll('anchor.x', 0.5);
+        this.explosionMediumGroup.setAll('anchor.y', 0.5);
+        this.explosionMediumGroup.callAll('animations.add', 'animations', 'explode', null, 30);
+        
+        this.explosionSmallGroup = game.add.group();
+        this.explosionSmallGroup.createMultiple(20, graphicAssets.explosionSmall.name, 0);
+        this.explosionSmallGroup.setAll('anchor.x', 0.5);
+        this.explosionSmallGroup.setAll('anchor.y', 0.5);
+        this.explosionSmallGroup.callAll('animations.add', 'animations', 'explode', null, 30);
     },
 
      initSounds: function () {
