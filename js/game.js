@@ -1,7 +1,7 @@
 var gameProperties = {
     screenWidth: 640,
     screenHeight: 480,
-
+    
     delayToStartLevel: 3,
 };
 
@@ -16,7 +16,7 @@ var graphicAssets = {
     asteroidLarge:{URL:'assets/asteroidLarge.png', name:'asteroidLarge'},
     asteroidMedium:{URL:'assets/asteroidMedium.png', name:'asteroidMedium'},
     asteroidSmall:{URL:'assets/asteroidSmall.png', name:'asteroidSmall'},
-
+    
     background:{URL:'assets/background.png', name:'background'},
     explosionLarge:{URL:'assets/explosionLarge.png', name:'explosionLarge', width:64, height:64, frames:8},
     explosionMedium:{URL:'assets/explosionMedium.png', name:'explosionMedium', width:58, height:58, frames:8},
@@ -45,7 +45,7 @@ var bulletProperties = {
     interval: 250,
     lifeSpan: 2000,
     maxCount: 30,
-}
+};
 
 var asteroidProperties = {
     startingAsteroids: 4,
@@ -54,12 +54,12 @@ var asteroidProperties = {
     
     asteroidLarge: { minVelocity: 50, maxVelocity: 150, minAngularVelocity: 0, maxAngularVelocity: 200, score: 20, nextSize: graphicAssets.asteroidMedium.name, pieces: 2, explosion:'explosionLarge' },
     asteroidMedium: { minVelocity: 50, maxVelocity: 200, minAngularVelocity: 0, maxAngularVelocity: 200, score: 50, nextSize: graphicAssets.asteroidSmall.name, pieces: 2, explosion:'explosionMedium' },
-    asteroidSmall: { minVelocity: 50, maxVelocity: 300, minAngularVelocity: 0, maxAngularVelocity: 200, score: 100, explosion:'explosionSmall' },
+    asteroidSmall: { minVelocity: 50, maxVelocity: 300, minAngularVelocity: 0, maxAngularVelocity: 200, score: 100, explosion:'explosionSmall' }, 
 };
 
 var fontAssets = {
     counterFontStyle:{font: '20px Arial', fill: '#FFFFFF', align: 'center'},
-}
+};
 
 var gameState = function (game){
     this.shipSprite;
@@ -78,13 +78,13 @@ var gameState = function (game){
     
     this.shipLives = shipProperties.startingLives;
     this.tf_lives;
-
+    
     this.score = 0;
     this.tf_score;
-
+    
     this.sndDestroyed;
     this.sndFire;
-
+    
     this.backgroundSprite;
     
     this.explosionLargeGroup;
@@ -101,7 +101,10 @@ gameState.prototype = {
         
         game.load.image(graphicAssets.bullet.name, graphicAssets.bullet.URL);
         game.load.image(graphicAssets.ship.name, graphicAssets.ship.URL);
-
+        
+        game.load.audio(soundAssets.destroyed.name, soundAssets.destroyed.URL);
+        game.load.audio(soundAssets.fire.name, soundAssets.fire.URL);
+        
         game.load.image(graphicAssets.background.name, graphicAssets.background.URL);
         game.load.spritesheet(graphicAssets.explosionLarge.name, graphicAssets.explosionLarge.URL, graphicAssets.explosionLarge.width, graphicAssets.explosionLarge.height, graphicAssets.explosionLarge.frames);
         game.load.spritesheet(graphicAssets.explosionMedium.name, graphicAssets.explosionMedium.URL, graphicAssets.explosionMedium.width, graphicAssets.explosionMedium.height, graphicAssets.explosionMedium.frames);
@@ -123,8 +126,7 @@ gameState.prototype = {
         this.asteroidGroup.forEachExists(this.checkBoundaries, this);
         
         game.physics.arcade.overlap(this.bulletGroup, this.asteroidGroup, this.asteroidCollision, null, this);
-        game.physics.arcade.overlap(this.shipSprite, this.asteroidGroup, this.asteroidCollision, null, this);
-
+        
         if (!this.shipIsInvulnerable) {
             game.physics.arcade.overlap(this.shipSprite, this.asteroidGroup, this.asteroidCollision, null, this);
         }
@@ -132,7 +134,7 @@ gameState.prototype = {
     
     initGraphics: function () {
         this.backgroundSprite = game.add.sprite(0, 0, graphicAssets.background.name);
-
+        
         this.shipSprite = game.add.sprite(shipProperties.startX, shipProperties.startY, graphicAssets.ship.name);
         this.shipSprite.angle = -90;
         this.shipSprite.anchor.set(0.5, 0.5);
@@ -141,11 +143,12 @@ gameState.prototype = {
         this.asteroidGroup = game.add.group();
         
         this.tf_lives = game.add.text(20, 10, shipProperties.startingLives, fontAssets.counterFontStyle);
-
+        
         this.tf_score = game.add.text(gameProperties.screenWidth - 20, 10, "0", fontAssets.counterFontStyle);
         this.tf_score.align = 'right';
-        this.tf_score.anchor.set(1, 0);this.explosionLargeGroup = game.add.group();
-
+        this.tf_score.anchor.set(1, 0);
+                
+        this.explosionLargeGroup = game.add.group();
         this.explosionLargeGroup.createMultiple(20, graphicAssets.explosionLarge.name, 0);
         this.explosionLargeGroup.setAll('anchor.x', 0.5);
         this.explosionLargeGroup.setAll('anchor.y', 0.5);
@@ -163,8 +166,8 @@ gameState.prototype = {
         this.explosionSmallGroup.setAll('anchor.y', 0.5);
         this.explosionSmallGroup.callAll('animations.add', 'animations', 'explode', null, 30);
     },
-
-     initSounds: function () {
+    
+    initSounds: function () {
         this.sndDestroyed = game.add.audio(soundAssets.destroyed.name);
         this.sndFire = game.add.audio(soundAssets.fire.name);
     },
@@ -229,12 +232,12 @@ gameState.prototype = {
     },
     
     fire: function () {
-
-         if (!this.shipSprite.alive) {
+        if (!this.shipSprite.alive) {
             return;
         }
-
-        if (game.time.now > this.bulletInterval) {            
+        if (game.time.now > this.bulletInterval) {
+            this.sndFire.play();
+            
             var bullet = this.bulletGroup.getFirstExists(false);
             
             if (bullet) {
@@ -287,7 +290,7 @@ gameState.prototype = {
     
     asteroidCollision: function (target, asteroid) {
         this.sndDestroyed.play();
-
+        
         target.kill();
         asteroid.kill();
         
@@ -297,15 +300,15 @@ gameState.prototype = {
         
         this.splitAsteroid(asteroid);
         this.updateScore(asteroidProperties[asteroid.key].score);
-
-         if (!this.asteroidGroup.countLiving()) {
+        
+        if (!this.asteroidGroup.countLiving()) {
             game.time.events.add(Phaser.Timer.SECOND * gameProperties.delayToStartLevel, this.nextLevel, this);
         }
-
+        
         var explosionGroup = asteroidProperties[asteroid.key].explosion + "Group";
         var explosion = this[explosionGroup].getFirstExists(false);
         explosion.reset(asteroid.x, asteroid.y);
-        explosion.animations.play('explode', null, false, true);
+        explosion.animations.play('explode', 30, false, true);
     },
     
     destroyShip: function () {
@@ -325,16 +328,16 @@ gameState.prototype = {
         this.shipIsInvulnerable = true;
         this.shipSprite.reset(shipProperties.startX, shipProperties.startY);
         this.shipSprite.angle = -90;
-
+        
         game.time.events.add(Phaser.Timer.SECOND * shipProperties.timeToReset, this.shipReady, this);
         game.time.events.repeat(Phaser.Timer.SECOND * shipProperties.blinkDelay, shipProperties.timeToReset / shipProperties.blinkDelay, this.shipBlink, this);
     },
-
+    
     shipReady: function () {
         this.shipIsInvulnerable = false;
         this.shipSprite.visible = true;
     },
-
+    
     shipBlink: function () {
         this.shipSprite.visible = !this.shipSprite.visible;
     },
@@ -344,12 +347,12 @@ gameState.prototype = {
             this.createAsteroid(asteroid.x, asteroid.y, asteroidProperties[asteroid.key].nextSize, asteroidProperties[asteroid.key].pieces);
         }
     },
-
+    
     updateScore: function (score) {
         this.score += score;
         this.tf_score.text = this.score;
     },
-
+    
     nextLevel: function () {
         this.asteroidGroup.removeAll(true);
         
