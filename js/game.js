@@ -315,6 +315,10 @@ gameState.prototype = {
         if (this.shipLives) {
             game.time.events.add(Phaser.Timer.SECOND * shipProperties.timeToReset, this.resetShip, this);
         }
+        
+        var explosion = this.explosionLargeGroup.getFirstExists(false);
+        explosion.reset(this.shipSprite.x, this.shipSprite.y);
+        explosion.animations.play('explode', 30, false, true);
     },
     
     resetShip: function () {
