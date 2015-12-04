@@ -369,6 +369,16 @@ var mainState = function(game){
     this.tf_start;
 };
 
+mainState.prototype = {
+    create: function () {
+        
+    },
+    
+    startGame: function () {
+        
+    },
+};
+
 var game = new Phaser.Game(gameProperties.screenWidth, gameProperties.screenHeight, Phaser.AUTO, 'gameDiv');
 game.state.add(states.main, mainState);
 game.state.add(states.game, gameState);
