@@ -6,6 +6,7 @@ var gameProperties = {
 };
 
 var states = {
+    main: "main",
     game: "game",
 };
 
