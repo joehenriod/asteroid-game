@@ -380,7 +380,7 @@ mainState.prototype = {
     },
     
     startGame: function () {
-        
+        game.state.start(states.game);
     },
 };
 
