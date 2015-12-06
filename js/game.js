@@ -363,6 +363,10 @@ gameState.prototype = {
         
         this.resetAsteroids();
     },
+
+    endGame: function () {
+        game.state.start(states.main);
+    },
 };
 
 var mainState = function(game){
