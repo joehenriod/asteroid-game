@@ -318,6 +318,8 @@ gameState.prototype = {
 
         if (this.shipLives) {
             game.time.events.add(Phaser.Timer.SECOND * shipProperties.timeToReset, this.resetShip, this);
+        } else {
+            game.time.events.add(Phaser.Timer.SECOND * shipProperties.timeToReset, this.endGame, this);
         }
         
         var explosion = this.explosionLargeGroup.getFirstExists(false);
