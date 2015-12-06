@@ -220,16 +220,16 @@ gameState.prototype = {
     },
     
     checkBoundaries: function (sprite) {
-        if (sprite.x < 0) {
-            sprite.x = game.width;
-        } else if (sprite.x > game.width) {
-            sprite.x = 0;
+        if (sprite.x + gameProperties.padding < 0) {
+            sprite.x = game.width + gameProperties.padding;
+        } else if (sprite.x - gameProperties.padding> game.width) {
+            sprite.x = -gameProperties.padding;
         } 
-
-        if (sprite.y < 0) {
-            sprite.y = game.height;
-        } else if (sprite.y > game.height) {
-            sprite.y = 0;
+ 
+        if (sprite.y + gameProperties.padding < 0) {
+            sprite.y = game.height + gameProperties.padding;
+        } else if (sprite.y - gameProperties.padding> game.height) {
+            sprite.y = -gameProperties.padding;
         }
     },
     
