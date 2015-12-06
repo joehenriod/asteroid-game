@@ -3,6 +3,7 @@ var gameProperties = {
     screenHeight: 480,
     
     delayToStartLevel: 3,
+    padding: 30,
 };
 
 var states = {
