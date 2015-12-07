@@ -113,6 +113,10 @@ gameState.prototype = {
         game.load.spritesheet(graphicAssets.explosionSmall.name, graphicAssets.explosionSmall.URL, graphicAssets.explosionSmall.width, graphicAssets.explosionSmall.height, graphicAssets.explosionSmall.frames);
     },
     
+    init: function () {
+        
+    },
+
     create: function () {
         this.initGraphics();
         this.initSounds();
