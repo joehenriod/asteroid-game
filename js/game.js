@@ -73,15 +73,11 @@ var gameState = function (game){
     this.key_fire;
     
     this.bulletGroup;
-    this.bulletInterval = 0;
     
     this.asteroidGroup;
-    this.asteroidsCount = asteroidProperties.startingAsteroids;
     
-    this.shipLives = shipProperties.startingLives;
     this.tf_lives;
     
-    this.score = 0;
     this.tf_score;
     
     this.sndDestroyed;
@@ -114,7 +110,10 @@ gameState.prototype = {
     },
     
     init: function () {
-        
+        this.bulletInterval = 0;
+        this.asteroidsCount = asteroidProperties.startingAsteroids;
+        this.shipLives = shipProperties.startingLives;
+        this.score = 0;
     },
 
     create: function () {
