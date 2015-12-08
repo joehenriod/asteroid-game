@@ -73,11 +73,9 @@ var gameState = function (game){
     this.key_fire;
     
     this.bulletGroup;
-    
     this.asteroidGroup;
     
     this.tf_lives;
-    
     this.tf_score;
     
     this.sndDestroyed;
@@ -115,7 +113,7 @@ gameState.prototype = {
         this.shipLives = shipProperties.startingLives;
         this.score = 0;
     },
-
+    
     create: function () {
         this.initGraphics();
         this.initSounds();
@@ -228,7 +226,7 @@ gameState.prototype = {
         } else if (sprite.x - gameProperties.padding> game.width) {
             sprite.x = -gameProperties.padding;
         } 
- 
+
         if (sprite.y + gameProperties.padding < 0) {
             sprite.y = game.height + gameProperties.padding;
         } else if (sprite.y - gameProperties.padding> game.height) {
@@ -325,10 +323,6 @@ gameState.prototype = {
         } else {
             game.time.events.add(Phaser.Timer.SECOND * shipProperties.timeToReset, this.endGame, this);
         }
-        
-        var explosion = this.explosionLargeGroup.getFirstExists(false);
-        explosion.reset(this.shipSprite.x, this.shipSprite.y);
-        explosion.animations.play('explode', 30, false, true);
     },
     
     resetShip: function () {
@@ -369,7 +363,7 @@ gameState.prototype = {
         
         this.resetAsteroids();
     },
-
+    
     endGame: function () {
         game.state.start(states.main);
     },
@@ -384,6 +378,7 @@ mainState.prototype = {
         var startInstructions = 'Click to Start -\n\nUP arrow key for thrust.\n\nLEFT and RIGHT arrow keys to turn.\n\nSPACE key to fire.';
         
         this.tf_start = game.add.text(game.world.centerX, game.world.centerY, startInstructions, fontAssets.counterFontStyle);
+        this.tf_start.align = 'center';
         this.tf_start.anchor.set(0.5, 0.5);
         
         game.input.onDown.addOnce(this.startGame, this);
